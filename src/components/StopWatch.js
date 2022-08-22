@@ -28,6 +28,11 @@ function StopWatch() {
 
     const [task, setTask] = useState('')
     const [isTaskStarted, setIsTaskStarted] = useState(false)
+
+    const [second2, setSecond2] = useState(0)
+    const [minute2, setMinutes2] = useState(0)
+    const [hour2, setHours2] = useState(0)
+
     const [second, setSeconds] = useState(0)
     const [minute, setMinutes] = useState(0)
     const [hour, setHours] = useState(0)
@@ -45,12 +50,24 @@ function StopWatch() {
         setMinutes(minute => minute + 1)
     }
 
-
-
     if (minute === 60) {
         setMinutes(0)
         setHours(hour => hour + 1)
     }
+
+
+
+    if (second2 === 60) {
+        setSecond2(0)
+        setMinutes2(minute2 => minute2 + 1)
+    }
+
+    if (minute2 === 60) {
+        setMinutes2(0)
+        setHours2(hour2 => hour2 + 1)
+    }
+
+
 
     const getTime = () =>{
         var date = new Date();
@@ -80,12 +97,6 @@ var timeIs = getTime()
 
     }
 
-    const resume = () =>{
-        var timeIs = getTime()
-        setIsActive(isActive)
-        setResumedTime(oldInputs => [...oldInputs, timeIs])
-    }
-
     useEffect(() => {
         var interval = null;
 
@@ -105,6 +116,16 @@ var timeIs = getTime()
         return () => clearInterval(interval)
 
     }, [isActive, second])
+
+    useEffect(()=>{
+        var interval2 = null;
+
+        interval2 = setInterval(()=>{
+            setSecond2(second2 => second2 + 1);
+        }, 1000)
+
+        return () => clearInterval(interval2)
+    },[second2])
 
 
 
@@ -132,8 +153,9 @@ var timeIs = getTime()
 
     const StopTask = () => {
 
-        const normalDuration = hour + ':' + minute + ':' + second
-        const decimalDuration = hour + '.' + minute / 60
+        const normalDuration = hour2 + ':' + minute2 + ':' + second2
+        const decimalDuration = hour2 + '.' + minute2 / 60
+        console.log(hour + ':' + minute + ':' + second)
         setNDuration(normalDuration)
         setDDuration(decimalDuration)
 

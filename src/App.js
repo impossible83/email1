@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.js';
 import { useState, useEffect } from 'react';
 
 import StopWatch from './components/StopWatch';
+import { downloadExcel } from "react-export-table-to-excel";
 
 
 /* <div className='wrapper'>
@@ -103,14 +104,16 @@ function App() {
 
   const addTimer = () => {
     setTimers(oldData => [...oldData, count + 1])
-  }
 
+   
+  }
   return (
     <div>
 
       <Navbar />
       <br /><br /> <br /> <br />
       <button style={{ width: '120px', bordercolor: 'blue', borderwidth: '1px', borderstyle: 'solid' }} onClick={addTimer}>New timer here</button>
+      
       {
         timers.map((item, i) => <div key={i}><StopWatch /></div>)
       }
