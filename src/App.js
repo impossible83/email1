@@ -110,7 +110,7 @@ function App() {
 
       <Navbar />
       <br /><br /> <br /> <br />
-      <button style={{ width: '120px', bordercolor: 'blue', borderwidth: '1px', borderstyle: 'solid' }} onClick={addTimer}>New timer</button>
+      <button style={{ width: '120px', bordercolor: 'blue', borderwidth: '1px', borderstyle: 'solid' }} onClick={addTimer}>New timer here</button>
       {
         timers.map((item, i) => <div key={i}><StopWatch /></div>)
       }

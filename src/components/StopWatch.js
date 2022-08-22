@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 
 
+
 function StopWatch() {
 
 
@@ -50,23 +51,39 @@ function StopWatch() {
         setMinutes(0)
         setHours(hour => hour + 1)
     }
-    var date = new Date();
+
+    const getTime = () =>{
+        var date = new Date();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var secs = date.getSeconds();
     var milisecnds = date.getMilliseconds();
     var currentTime = hours + ':' + minutes + ':' + secs + '.' + milisecnds;
+    return currentTime
+    }
+   /*  var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var secs = date.getSeconds();
+    var milisecnds = date.getMilliseconds();
+    var currentTime = hours + ':' + minutes + ':' + secs + '.' + milisecnds; */
     const pause = () => {
 
-
+var timeIs = getTime()
         setIsActive(!isActive)
         if (!isActive) {
-            setResumedTime(oldInputs => [...oldInputs, currentTime])
+            setResumedTime(oldInputs => [...oldInputs, timeIs])
         }
         if (isActive) {
-            setPausedTime(oldInputs => [...oldInputs, currentTime])
+            setPausedTime(oldInputs => [...oldInputs, timeIs])
         }
 
+    }
+
+    const resume = () =>{
+        var timeIs = getTime()
+        setIsActive(isActive)
+        setResumedTime(oldInputs => [...oldInputs, timeIs])
     }
 
     useEffect(() => {
@@ -87,7 +104,7 @@ function StopWatch() {
 
         return () => clearInterval(interval)
 
-    }, [isActive, second, hour, minute])
+    }, [isActive, second])
 
 
 
@@ -101,7 +118,7 @@ function StopWatch() {
         setIsActive(true)
         setInputVisibility(false)
         setIsTaskStarted(true)
-        setStartTime(currentTime)
+        setStartTime(getTime())
 
     }
 
@@ -125,7 +142,7 @@ function StopWatch() {
         setIsTaskStarted(false)
 
 
-        setFinishedTime(currentTime)
+        setFinishedTime(getTime())
         setTimeout(reset(), 1)
 
     }
@@ -299,7 +316,7 @@ function StopWatch() {
                             <th><button
                                 style={{
                                     display:
-                                        second === 0 && minute === 0 && hour === 0 ? 'none' : 'block',
+                                        second === 0 && minute === 0 && hour === 0? 'none' : 'block',
                                     backgroundColor: 'green',
                                     borderColor: 'black',
                                     borderWidth: '2px',
