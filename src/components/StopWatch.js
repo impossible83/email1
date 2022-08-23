@@ -19,6 +19,7 @@ function StopWatch() {
 
     let [pausedTime, setPausedTime] = useState([])
     let [resumedTime, setResumedTime] = useState([])
+    let [s, setS] = useState('')
     //const [item, setItem] = useState(tasks)
 
     const [task, setTask] = useState('')
@@ -33,11 +34,14 @@ function StopWatch() {
     const [hour, setHours] = useState(0)
     const [inputVisibility, setInputVisibility] = useState(true)
     const [startTime, setStartTime] = useState('')
+    const [startTime2, setStartTime2] = useState('')
     const [finishedTime, setFinishedTime] = useState('')
     const [nDuration, setNDuration] = useState('')
     const [dDuration, setDDuration] = useState('')
 
     const [isActive, setIsActive] = useState(false)
+
+    
 
 
     if (second === 60) {
@@ -63,7 +67,6 @@ function StopWatch() {
     }
 
 
-
     const getTime = () =>{
         var date = new Date();
     var hours = date.getHours();
@@ -73,12 +76,32 @@ function StopWatch() {
     var currentTime = hours + ':' + minutes + ':' + secs + '.' + milisecnds;
     return currentTime
     }
+    const getTime2 = () =>{
+        var date1 = new Date();
+    var hours1 = date1.getHours();
+    var minutes1 = date1.getMinutes();
+    var secs1 = date1.getSeconds();
+    var currentTime1 = hours1 + ':' + minutes1 + ':' + secs1 ;
+    return currentTime1
+    }
    /*  var date = new Date();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var secs = date.getSeconds();
     var milisecnds = date.getMilliseconds();
     var currentTime = hours + ':' + minutes + ':' + secs + '.' + milisecnds; */
+    const betterTime2 = () => {
+        var splitStartTime = startTime2.split(':')
+        var currentTimeSplit = getTime2().split(':')
+        var h = currentTimeSplit[0] - splitStartTime[0]
+        var m = currentTimeSplit[1] - splitStartTime[1]
+        var ss = currentTimeSplit[2] - splitStartTime[2]
+       
+      
+            return h + ':' + m + ':'+ ss
+       
+        
+    }
     const pause = () => {
 
 var timeIs = getTime()
@@ -90,7 +113,7 @@ var timeIs = getTime()
             
         }
         if (isActive) {
-           
+            setS(betterTime2())
             setPausedTime(oldInputs => [...oldInputs, timeIs])
             
             
@@ -135,14 +158,21 @@ var timeIs = getTime()
         tasks.taskname = e.target.value
 
     }
+    
 
+
+    
     const StartTask = () => {
 
         setIsActive(true)
         setInputVisibility(false)
         setIsTaskStarted(true)
+        setStartTime2(getTime2())
         setStartTime(getTime())
+        
         tasks.taskStared = getTime()
+        
+       
 
     }
 
@@ -193,8 +223,24 @@ var timeIs = getTime()
         filename: 'Users table555',
         sheet: 'Users'
     })
+
+
+const betterTime = () => {
+    var splitStartTime = startTime2.split(':')
+    var currentTimeSplit = getTime2().split(':')
+    var h = currentTimeSplit[0] - splitStartTime[0]
+    var m = currentTimeSplit[1] - splitStartTime[1]
+    var ss = currentTimeSplit[2] - splitStartTime[2]
     
+    if(currentTimeSplit[2] < splitStartTime[2]){
+        ss = splitStartTime[2] - currentTimeSplit[2]
+    }
     
+    if (isActive){
+        return h + ':' + m + ':'+ ss
+    }
+    
+}
 
     return (
         <div>
@@ -204,7 +250,7 @@ var timeIs = getTime()
          
            <div>
                 
-
+           
                    <button onClick={onDownload}> Export excel </button>
 
                 
@@ -539,9 +585,10 @@ var timeIs = getTime()
                                     placeholder='Enter task name'
                                     name='task' value={task}
                                     onChange={onChange} /> </th>
-                            <th>{hour >= 10 ? hour : '0' + hour}:</th>
-                            <th>{minute >= 10 ? minute : '0' + minute}:</th>
-                            <th>{second >= 10 ? second : '0' + second}</th>
+                                    <td>{betterTime()}</td>
+                            {/* <th>{hour >= 10 ? hour : '0' + hour}:</th>
+                            <th>{minute >= 10 ? minute : '0' + minute}:</th> */}
+                           
                             <th><button style={{ display: second !== 0 || minute !== 0 || hour !== 0 ? 'none' : 'block' }} onClick={StartTask}>Start Task</button></th>
                             <th><button
                                 style={{
@@ -569,6 +616,7 @@ var timeIs = getTime()
                         </tr>
                     </tbody>
                 </table>
+                <div>{s}</div>
             </div>
         </div>
     );
