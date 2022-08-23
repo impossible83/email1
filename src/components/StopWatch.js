@@ -95,13 +95,35 @@ function StopWatch() {
         var currentTimeSplit = getTime2().split(':')
         var h = currentTimeSplit[0] - splitStartTime[0]
         var m = currentTimeSplit[1] - splitStartTime[1]
-        var ss = currentTimeSplit[2] - splitStartTime[2]
+        var ss = currentTimeSplit[2] 
        
       
             return h + ':' + m + ':'+ ss
        
         
     }
+    const betterTime3 = () => {
+        var splitStartTime = startTime2.split(':')
+        var currentTimeSplit = getTime2().split(':')
+
+        var totalCurrentS = currentTimeSplit[2]
+        var totalCurrentM = currentTimeSplit[1] * 60
+        var totalCurrentH = currentTimeSplit[0] * 60 * 60
+        var totalCurrentT = totalCurrentM + totalCurrentH
+
+        var totalStartS = splitStartTime[2]
+        var totalStartM = splitStartTime[1] * 60
+        var totalStartH = splitStartTime[0] * 60 * 60
+        var totalStartT = totalStartM + totalStartH
+
+        
+        var shows = (currentTimeSplit[0] * 60 * 60 ) + (currentTimeSplit[1] * 60)
+        var start = (splitStartTime[0] * 60 * 60) +  (splitStartTime[1] * 60)
+        var hh = Math.floor(((shows - start) / 60) / 60)
+        return  hh + ' : ' + (shows - start) / 60 + ' : ' + totalCurrentS
+    }
+
+    //console.log(betterTime3());
     const pause = () => {
 
 var timeIs = getTime()
@@ -230,11 +252,9 @@ const betterTime = () => {
     var currentTimeSplit = getTime2().split(':')
     var h = currentTimeSplit[0] - splitStartTime[0]
     var m = currentTimeSplit[1] - splitStartTime[1]
-    var ss = currentTimeSplit[2] - splitStartTime[2]
+    var ss = currentTimeSplit[2] 
     
-    if(currentTimeSplit[2] < splitStartTime[2]){
-        ss = splitStartTime[2] - currentTimeSplit[2]
-    }
+    
     
     if (isActive){
         return h + ':' + m + ':'+ ss
