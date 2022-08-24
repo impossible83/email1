@@ -200,7 +200,7 @@ function StopWatch() {
         console.log("h:" + fhSum + "m:" + fmSum + "s:" + fsSum);
         
         setNDuration(actualDuration)
-        
+        setNotes(note)
 
     }
     const tableRef = useRef(null);
@@ -212,10 +212,7 @@ function StopWatch() {
 
     
 
-    const submit = () =>{
-        setNotes(note)
-    }
-
+    
     return (
         <div>
              
@@ -566,13 +563,13 @@ function StopWatch() {
                                     borderStyle: 'solid',
                                     width: '150px', 
                                     height: '100px'
-                                }}>{notes === '' ? <textarea 
+                                }}><textarea 
                                 name="note" 
                                 value={note} 
                                 rows="7" 
                                 cols="40" 
                                 onChange={(e)=> setNote(e.target.value)}>
-                                    </textarea> : notes}</td>
+                                    </textarea></td>
                                         
                         </tr>
                     </tbody>
