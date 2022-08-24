@@ -5,7 +5,7 @@ import "../App.css";
 const Navbar = () => {
     return (
         <div className="navbar">
-            Updated duration to actual duration minus break time
+            Updated includes adding notes
         </div>
     );
 };

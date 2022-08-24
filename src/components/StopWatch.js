@@ -12,7 +12,8 @@ function StopWatch() {
 
     let [pausedTime, setPausedTime] = useState([])
     let [resumedTime, setResumedTime] = useState([])
-    let [test, setTest] = useState([])
+    let [notes, setNotes] = useState('')
+    let [note, setNote] = useState('')
 
     const [task, setTask] = useState('')
     const [isTaskStarted, setIsTaskStarted] = useState(false)
@@ -85,7 +86,7 @@ function StopWatch() {
         setInputVisibility(false)
         setIsTaskStarted(true)
         setStartTime(getTime())
-        
+        setNotes(note)
     }
 
     const reset = () => {
@@ -209,8 +210,11 @@ function StopWatch() {
         sheet: 'Users'
     })
 
+    
 
-
+    const submit = () =>{
+        setNotes(note)
+    }
 
     return (
         <div>
@@ -543,6 +547,33 @@ function StopWatch() {
                                     borderStyle: 'solid',
                                     width: '90px'
                                 }}>{dDuration}</td>
+                        </tr>
+                        <tr>
+                            <td style={{
+                                            backgroundColor: 'black',
+                                            color: 'white',
+                                            bordercolor: 'black',
+                                            borderwidth: '2px',
+                                            borderStyle: 'solid',
+                                            width: '90px'
+                                        }}>Notes</td>
+                                        <td
+                                style={{
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'green',
+                                    borderWidth: '2px',
+                                    borderStyle: 'solid',
+                                    width: '150px', 
+                                    height: '100px'
+                                }}>{notes === '' ? <textarea 
+                                name="note" 
+                                value={note} 
+                                rows="7" 
+                                cols="40" 
+                                onChange={(e)=> setNote(e.target.value)}>
+                                    </textarea> : notes}</td>
+                                        
                         </tr>
                     </tbody>
                 </table>
