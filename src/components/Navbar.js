@@ -5,7 +5,7 @@ import "../App.css";
 const Navbar = () => {
     return (
         <div className="navbar">
-            Update includes exporting to excel
+            Updated duration to actual duration minus break time
         </div>
     );
 };
